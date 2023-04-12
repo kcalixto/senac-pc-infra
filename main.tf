@@ -15,8 +15,8 @@ resource "aws_subnet" "senac-pc-vpc-subnet-1" {
 
 # Create security group
 resource "aws_security_group" "senac-pc-sg" {
-  name =      "SenacPC-SG"
-  vpc_id      = aws_vpc.senac-pc-vpc.id
+  name   = "SenacPC-SG"
+  vpc_id = aws_vpc.senac-pc-vpc.id
 
   ingress {
     from_port   = 22
@@ -29,7 +29,7 @@ resource "aws_security_group" "senac-pc-sg" {
 
 # Create EC2 instance
 resource "aws_instance" "senac-pc" {
-  ami           = "ami-05240a8eacac22db2"  # AWS Linux AMI
+  ami           = "ami-05240a8eacac22db2" # AWS Linux AMI
   instance_type = "t2.micro"
   key_name      = "teste-ssh"
 
@@ -37,5 +37,5 @@ resource "aws_instance" "senac-pc" {
 
   subnet_id = aws_subnet.senac-pc-vpc-subnet-1.id
 
-  associate_public_ip_address = true  # Associate a public IP address with the instance
+  associate_public_ip_address = true # Associate a public IP address with the instance
 }
