@@ -31,7 +31,7 @@ resource "aws_security_group" "senac-pc-sg" {
 resource "aws_instance" "senac-pc" {
   ami           = "ami-05240a8eacac22db2"  # AWS Linux AMI
   instance_type = "t2.micro"
-  key_name      = "sandisk-keypair"
+  key_name      = "teste-ssh"
 
   vpc_security_group_ids = [aws_security_group.senac-pc-sg.id]
 
