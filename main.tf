@@ -24,6 +24,13 @@ resource "aws_security_group" "senac-pc-sg" {
     protocol    = "tcp"
     cidr_blocks = ["186.239.253.173/32"]
   }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 # Create EC2 instance
