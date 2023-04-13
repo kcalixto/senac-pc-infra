@@ -26,7 +26,6 @@ resource "aws_security_group" "senac-pc-sg" {
   }
 }
 
-
 # Create EC2 instance
 resource "aws_instance" "senac-pc" {
   ami           = "ami-05240a8eacac22db2" # AWS Linux AMI
