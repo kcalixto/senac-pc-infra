@@ -1,0 +1,40 @@
+service: senac-pc-infra
+
+custom:
+  vpcCIDR: 192.168.0.0/24
+  publicSubnet1CIDR: 192.168.0.0/28
+
+provider:
+  name: aws
+  region: sa-east-1
+  stage: prd
+
+resources:
+  Resources:
+    VPC:
+      Type: AWS::EC2::VPC
+      Properties:
+        CidrBlock: ${self:custom.vpcCIDR}
+        EnableDnsSupport: true
+        EnableDnsHostnames: true
+
+    InternetGateway:
+      Type: AWS::EC2::InternetGateway
+      Properties:
+        Tags:
+          - Key: Name
+            Value: "senac-pc-internet-gtw"
+
+    InternetGatewayAttachment:
+      Type: AWS::EC2::VPCGatewayAttachment
+      Properties:
+        InternetGatewayId: !Ref InternetGateway
+        VpcId: !Ref VPC
+
+    PublicSubnet1:
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId: !Ref VPC
+        CidrBlock: ${self:custom.publicSubnet1CIDR}
+        MapPublicIpOnLaunch: true
+        AvailabilityZone: sa-east-1a

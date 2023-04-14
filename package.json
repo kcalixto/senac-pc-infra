@@ -1,0 +1,16 @@
+{
+  "name": "tfe_senac-pc",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "since serverless does not support vpc continuous deploy, infra must be deployed on hand, after that ci cd shall work fine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1358.0"
+  }
+}

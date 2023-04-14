@@ -1,0 +1,57 @@
+service: senac-pc
+
+custom:
+  vpcID: "vpc-00c74da05567f713b"
+  vpcSubnetID: "subnet-0a31e1d4bfbe0a332"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: sa-east-1
+  stage: prd
+
+resources:
+  Resources:
+    SecurityGroupSSH:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        VpcId: ${self:custom.vpcID}
+        GroupDescription: ${self:service}-ssh-sg
+        GroupName: ${self:service}-ssh-sg
+
+    SSHOutboundRule:
+      Type: AWS::EC2::SecurityGroupEgress
+      Properties:
+          CidrIp: 0.0.0.0/0
+
+          IpProtocol: tcp
+          FromPort: 0
+          ToPort: 65535
+          GroupId:
+            Fn::GetAtt:
+              - SecurityGroupSSH
+              - GroupId
+
+    SSHInboundRule:
+      Type: AWS::EC2::SecurityGroupIngress
+      Properties:
+          CidrIp: 0.0.0.0/0
+
+          IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          GroupId:
+            Fn::GetAtt:
+              - SecurityGroupSSH
+              - GroupId
+
+    Instance:
+      Type: AWS::EC2::Instance
+      Properties:
+        ImageId: ami-05240a8eacac22db2
+        KeyName: mac-ssh
+        InstanceType: t2.micro
+
+        SubnetId: ${self:custom.vpcSubnetID}
+        SecurityGroupIds:
+          - !Ref SecurityGroupSSH
