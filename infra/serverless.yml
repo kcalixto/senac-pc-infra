@@ -18,6 +18,14 @@ resources:
         EnableDnsSupport: true
         EnableDnsHostnames: true
 
+    PublicSubnet1:
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId: !Ref VPC
+        CidrBlock: ${self:custom.publicSubnet1CIDR}
+        MapPublicIpOnLaunch: true
+        AvailabilityZone: sa-east-1a
+
     InternetGateway:
       Type: AWS::EC2::InternetGateway
       Properties:
@@ -31,10 +39,22 @@ resources:
         InternetGatewayId: !Ref InternetGateway
         VpcId: !Ref VPC
 
-    PublicSubnet1:
-      Type: AWS::EC2::Subnet
+    PublicRouteTable:
+      Type: AWS::EC2::RouteTable
       Properties:
         VpcId: !Ref VPC
-        CidrBlock: ${self:custom.publicSubnet1CIDR}
-        MapPublicIpOnLaunch: true
-        AvailabilityZone: sa-east-1a
+
+    DefaultPublicRoute:
+      Type: AWS::EC2::Route
+      DependsOn: InternetGatewayAttachment
+      Properties:
+        RouteTableId: !Ref PublicRouteTable
+        DestinationCidrBlock: 0.0.0.0/0
+        GatewayId: !Ref InternetGateway
+
+    PublicSubnet1RouteTableAssociation:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: !Ref PublicRouteTable
+        SubnetId: !Ref PublicSubnet1
+

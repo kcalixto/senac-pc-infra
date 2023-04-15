@@ -1,8 +1,8 @@
 service: senac-pc
 
 custom:
-  vpcID: "vpc-00c74da05567f713b"
-  vpcSubnetID: "subnet-0a31e1d4bfbe0a332"
+  vpcID: "vpc-0df351153bc7efddd"
+  vpcSubnetID: "subnet-094a3db510feb76f3"
 
 provider:
   name: aws
