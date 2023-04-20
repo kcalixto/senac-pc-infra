@@ -4,7 +4,7 @@ custom:
   vpcID: "vpc-0df351153bc7efddd"
   vpcSubnetID: "subnet-094a3db510feb76f3"
 
-  keyName: "senac-pc-ssh"
+  keyName: senac-ssh
 
 provider:
   name: aws
