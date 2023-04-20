@@ -74,11 +74,6 @@ resources:
             #!/bin/bash
             sudo yum -y update
             sudo yum -y install zsh
-            sudo yum -y install node
-            
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
             sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-            source ~/.zshrc
-
-            brew install node@18
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
