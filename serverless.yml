@@ -4,6 +4,8 @@ custom:
   vpcID: "vpc-0df351153bc7efddd"
   vpcSubnetID: "subnet-094a3db510feb76f3"
 
+  keyName: "senac-pc-ssh"
+
 provider:
   name: aws
   runtime: nodejs18.x
@@ -49,7 +51,7 @@ resources:
       Type: AWS::EC2::Instance
       Properties:
         ImageId: ami-05240a8eacac22db2
-        KeyName: mac-ssh
+        KeyName: ${self:custom.keyName}
         InstanceType: t2.micro
 
         SubnetId: ${self:custom.vpcSubnetID}

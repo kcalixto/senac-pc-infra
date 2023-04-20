@@ -22,7 +22,9 @@ jobs:
           aws-region: sa-east-1
 
       - name: Install Dependencies
-        run: npm install --save-dev
+        run: |
+          npm install --save-dev
+          npm install serverless -g
 
       - name: Deploy Serverless
         run: sls deploy --verbose
