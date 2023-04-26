@@ -24,7 +24,7 @@ resources:
     SSHOutboundRule:
       Type: AWS::EC2::SecurityGroupEgress
       Properties:
-          CidrIp: 0.0.0.0/0
+          CidrIp: 186.239.253.173/0
 
           IpProtocol: tcp
           FromPort: 0
@@ -37,7 +37,7 @@ resources:
     SSHInboundRule:
       Type: AWS::EC2::SecurityGroupIngress
       Properties:
-          CidrIp: 0.0.0.0/0
+          CidrIp: 186.239.253.173/0
 
           IpProtocol: tcp
           FromPort: 22
@@ -46,13 +46,6 @@ resources:
             Fn::GetAtt:
               - SecurityGroupSSH
               - GroupId
-
-    Volume:
-      Type: AWS::EC2::Volume
-      Properties: 
-        AvailabilityZone: sa-east-1a
-        Size: 8
-        VolumeType: gp3
 
     Instance:
       Type: AWS::EC2::Instance
@@ -80,3 +73,10 @@ resources:
             echo 'export ZSH=/home/ec2-user/.oh-my-zsh' >> /home/ec2-user/.zshrc
             echo 'export TERM=xterm-256color' >> /home/ec2-user/.zshrc
             echo '. $ZSH/oh-my-zsh.sh' >> /home/ec2-user/.zshrc
+
+    Volume:
+      Type: AWS::EC2::Volume
+      Properties: 
+        AvailabilityZone: sa-east-1a
+        Size: 8
+        VolumeType: gp3
