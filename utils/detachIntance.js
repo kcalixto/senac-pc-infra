@@ -1,4 +1,4 @@
-import * as AWS from "aws-sdk"
+import AWS from "aws-sdk"
 import * as dotenv from "dotenv"
 
 export function load(){
