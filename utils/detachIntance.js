@@ -1,9 +1,9 @@
-import *as AWS from "aws-sdk"
+import * as AWS from "aws-sdk"
 import * as dotenv from "dotenv"
 
-dotenv.config()
-
 (() => {
+    dotenv.config()
+
     AWS.config.update({
         region: 'sa-east-1'
     })
