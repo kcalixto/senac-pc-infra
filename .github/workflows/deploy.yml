@@ -26,6 +26,7 @@ jobs:
           npm install --save-dev
           npm install serverless -g
 
+      # TODO fix this (not working w/ env variables because its not running w/ serverless)
       - name: Detach instance volume
         run: npm run detach
 
