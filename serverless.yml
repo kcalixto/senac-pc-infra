@@ -11,9 +11,8 @@ provider:
   runtime: nodejs18.x
   region: sa-east-1
   stage: prd
-
   environment:
-    INSTANCE_ID: !Ref Instance
+    INSTANCE_ID: "Teste"
     VOLUME_ID: !Ref Volume
 
 resources:
