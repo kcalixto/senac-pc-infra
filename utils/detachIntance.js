@@ -1,12 +1,9 @@
 import * as AWS from "aws-sdk"
 import * as dotenv from "dotenv"
 
+AWS.config.region = 'sa-east-1'
 (() => {
     dotenv.config()
-
-    AWS.config.update({
-        region: 'sa-east-1'
-    })
 
     const ec2 = new AWS.EC2();
 
