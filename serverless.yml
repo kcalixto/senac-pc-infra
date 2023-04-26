@@ -12,6 +12,10 @@ provider:
   region: sa-east-1
   stage: prd
 
+  environment:
+    INSTANCE_ID: !Ref Instance
+    VOLUME_ID: !Ref Volume
+
 resources:
   Resources:
     SecurityGroupSSH:

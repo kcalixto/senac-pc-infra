@@ -26,5 +26,8 @@ jobs:
           npm install --save-dev
           npm install serverless -g
 
+      - name: Detach instance volume
+        run: npm run detach
+
       - name: Deploy Serverless
         run: sls deploy --verbose
