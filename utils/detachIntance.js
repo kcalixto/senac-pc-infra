@@ -1,9 +1,11 @@
 import * as AWS from "aws-sdk"
 import * as dotenv from "dotenv"
 
-AWS.config.region('sa-east-1')
-(() => {
+export function load(){
     dotenv.config()
+    AWS.config.update({
+        region: 'sa-east-1'
+    })
 
     const ec2 = new AWS.EC2();
 
@@ -33,4 +35,5 @@ AWS.config.region('sa-east-1')
             console.log("Volume detached successfully:", data);
         }
     });
-})()
+}
+load()
