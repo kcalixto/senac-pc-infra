@@ -1,5 +1,5 @@
 import AWS from "aws-sdk"
-import * as dotenv from "dotenv"
+import dotenv from "dotenv"
 
 export function load(){
     dotenv.config()
@@ -23,8 +23,8 @@ export function load(){
     console.log("volumeID: " + volumeID)
 
     const params = {
-        InstanceId: process.env.INSTANCE_ID, // replace with your instance ID
-        VolumeId: process.env.VOLUME_ID, // replace with your volume ID
+        InstanceId: instanceID, // replace with your instance ID
+        VolumeId: volumeID, // replace with your volume ID
         Device: '/dev/sdf' // replace with your device name
     };
 
