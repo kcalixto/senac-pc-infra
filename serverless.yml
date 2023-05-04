@@ -27,7 +27,7 @@ resources:
     SSHOutboundRule:
       Type: AWS::EC2::SecurityGroupEgress
       Properties:
-          CidrIp: 186.239.253.173/0
+          CidrIp: 0.0.0.0/0
 
           IpProtocol: tcp
           FromPort: 0
@@ -40,7 +40,7 @@ resources:
     SSHInboundRule:
       Type: AWS::EC2::SecurityGroupIngress
       Properties:
-          CidrIp: 186.239.253.173/0
+          CidrIp: 0.0.0.0/0
 
           IpProtocol: tcp
           FromPort: 22
