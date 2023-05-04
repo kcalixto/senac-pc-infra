@@ -61,25 +61,22 @@ resources:
         SecurityGroupIds:
           - !Ref SecurityGroupSSH
 
-        Volumes:
-          - Device: /dev/sdf
-            VolumeId: !Ref Volume
+        # Volumes:
+        #   - Device: /dev/sdf
+        #     VolumeId: !Ref Volume
 
         UserData:
           Fn::Base64: !Sub |
             #!/bin/bash
-            sudo yum -y update
-            sudo yum -y install zsh
+            yum update -y
+            yum install git
+            git clone https://github.com/kcalixto/senac-pc-infra
+            chmod 700 ./senac-pc-infra/init.sh
+            ./senac-pc-infra/init.sh
 
-            sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-            chsh -s /bin/zsh ec2-user
-            echo 'export ZSH=/home/ec2-user/.oh-my-zsh' >> /home/ec2-user/.zshrc
-            echo 'export TERM=xterm-256color' >> /home/ec2-user/.zshrc
-            echo '. $ZSH/oh-my-zsh.sh' >> /home/ec2-user/.zshrc
-
-    Volume:
-      Type: AWS::EC2::Volume
-      Properties: 
-        AvailabilityZone: sa-east-1a
-        Size: 8
-        VolumeType: gp3
+    # Volume:
+    #   Type: AWS::EC2::Volume
+    #   Properties: 
+    #     AvailabilityZone: sa-east-1a
+    #     Size: 8
+    #     VolumeType: gp3
