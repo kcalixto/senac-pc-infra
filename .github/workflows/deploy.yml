@@ -26,9 +26,24 @@ jobs:
           npm install --save-dev
           npm install serverless -g
 
-      # TODO fix this (not working w/ env variables because its not running w/ serverless)
-      - name: Detach instance volume
-        run: npm run detach
+      - name: check infra changes
+        id: infra
+        uses: tj-actions/changed-files@v35
+        with:
+          files: infra/**
 
-      - name: Deploy Serverless
-        run: sls deploy --verbose
+      - name: check should deploy infra
+        if: steps.infra.outputs.any_changed == 'true'
+        run: |
+          make deploy-infra
+
+      - name: check pc changes
+        id: pc
+        uses: tj-actions/changed-files@v35
+        with:
+          files: infra/**
+
+      - name: check should deploy pc
+        if: steps.pc.outputs.any_changed == 'true'
+        run: |
+          make deploy-pc
