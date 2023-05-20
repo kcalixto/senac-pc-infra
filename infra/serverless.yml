@@ -64,3 +64,7 @@ resources:
         Size: 8
         VolumeType: gp3
         AvailabilityZone: sa-east-1a
+        Tags:
+          - Key: "Name"
+            Value: "senac-pc-infra-default-volume"
+            
