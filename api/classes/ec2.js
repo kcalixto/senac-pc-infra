@@ -15,7 +15,9 @@ export default class EC2 {
         this.conn = ec2svc
     }
 
-    get conn() {
-        return this.conn
+    async getAllInstances() {
+        const response = this.conn.describeInstances().promise()
+
+        console.log("instances: ", response)
     }
 }
