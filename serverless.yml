@@ -3,6 +3,7 @@ service: senac-pc
 custom:
   vpcID: "vpc-0df351153bc7efddd"
   vpcSubnetID: "subnet-094a3db510feb76f3"
+  volumeID: ""
 
   keyName: sandisk-key
 
@@ -14,6 +15,20 @@ provider:
   environment:
     INSTANCE_ID: "Teste"
     VOLUME_ID: !Ref Volume
+
+functions:
+  start:
+    handler: api/handler.start
+    events:
+      - httpApi:
+          path: /start
+          method: POST
+  stop:
+    handler: api/handler.stop
+    events:
+      - httpApi:
+          path: /stop
+          method: POST
 
 resources:
   Resources:
@@ -61,9 +76,9 @@ resources:
         SecurityGroupIds:
           - !Ref SecurityGroupSSH
 
-        # Volumes:
-        #   - Device: /dev/sdf
-        #     VolumeId: !Ref Volume
+        Volumes:
+          - Device: /dev/sdf
+            VolumeId: ${self:custom.volumeID}
 
         UserData:
           Fn::Base64: !Sub |
@@ -73,10 +88,3 @@ resources:
             git clone https://github.com/kcalixto/senac-pc-infra
             chmod 700 ./senac-pc-infra/init.sh
             ./senac-pc-infra/init.sh
-
-    # Volume:
-    #   Type: AWS::EC2::Volume
-    #   Properties: 
-    #     AvailabilityZone: sa-east-1a
-    #     Size: 8
-    #     VolumeType: gp3
