@@ -67,4 +67,3 @@ resources:
         Tags:
           - Key: "Name"
             Value: "senac-pc-infra-default-volume"
-            
