@@ -45,4 +45,5 @@ jobs:
         run: make deploy-infra
 
       - name: deploy pc
+        if: steps.infra.outputs.any_changed == 'false'
         run: make deploy-pc
