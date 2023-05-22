@@ -11,8 +11,16 @@ jobs:
     environment: production
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -30,20 +38,11 @@ jobs:
         id: infra
         uses: tj-actions/changed-files@v35
         with:
-          files: infra/**
+          files: infra/serverless.yml
 
       - name:  deploy infra
         if: steps.infra.outputs.any_changed == 'true'
-        run: |
-          make deploy-infra
-
-      - name: check pc changes
-        id: pc
-        uses: tj-actions/changed-files@v35
-        with:
-          files: infra/**
+        run: make deploy-infra
 
       - name: deploy pc
-        if: steps.pc.outputs.any_changed == 'true'
-        run: |
-          make deploy-pc
+        run: make deploy-pc
