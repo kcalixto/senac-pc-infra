@@ -32,7 +32,7 @@ jobs:
         with:
           files: infra/**
 
-      - name: check should deploy infra
+      - name:  deploy infra
         if: steps.infra.outputs.any_changed == 'true'
         run: |
           make deploy-infra
@@ -43,7 +43,7 @@ jobs:
         with:
           files: infra/**
 
-      - name: check should deploy pc
+      - name: deploy pc
         if: steps.pc.outputs.any_changed == 'true'
         run: |
           make deploy-pc
