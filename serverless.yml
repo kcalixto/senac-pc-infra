@@ -3,7 +3,7 @@ service: senac-pc
 custom:
   vpcID: "vpc-0df351153bc7efddd"
   vpcSubnetID: "subnet-094a3db510feb76f3"
-  volumeID: ""
+  volumeID: "vol-009ccc1cb89f31a7c"
 
   keyName: sandisk-key
 
